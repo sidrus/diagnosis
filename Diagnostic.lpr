@@ -3,10 +3,7 @@
 (in-package :cg-user)
 
 (define-project :name :|Diagnostic|
-  :modules (list (make-instance 'form-module :name "mainform"
-                                :finder-function 'mainform
-                                :has-pixmap-file nil :create-on-open
-                                t))
+  :modules (list (make-instance 'module :name "data"))
   :projects nil
   :libraries nil
   :distributed-files nil
