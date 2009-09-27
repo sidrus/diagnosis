@@ -3,7 +3,9 @@
 (in-package :cg-user)
 
 (define-project :name :|Diagnostic|
-  :modules (list (make-instance 'module :name "data"))
+  :modules (list (make-instance 'module :name "data")
+                 (make-instance 'module :name "functions")
+                 (make-instance 'module :name "main"))
   :projects nil
   :libraries nil
   :distributed-files nil

@@ -1,4 +1,6 @@
-;;; This file contains the functions that are required by the diagnostic tool.
+;;; This is the main code file.
+(defparam *kb* (list *kb*)
+  "The main symptom/disease knowledge base")
 
 
 ;;; SHORTEST-PATH function determines the least-cost
@@ -6,7 +8,7 @@
 (defun shortest-path (start end net)
   (bfs end (list (list start)) net))
 
-;;; BFS function executes a bredth-first search for a 
+;;; BFS function executes a breadth-first search for a 
 ;;; goal node given a network of nodes.
 (defun bfs (end queue net)
   (if (null queue)
@@ -26,3 +28,4 @@
   (mapcar #'(lambda (n)
               (cons n path))
     (cdr (assoc node net))))
+
