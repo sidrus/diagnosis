@@ -8,7 +8,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; PROGRAM GLOBALS ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
-(defparameter *goals* '((diagnosis chicken-pox measles mumps influenza pneumonia no-illness common-cold)))
 (defvar *diagnosis-problem*)
 (defvar *decision-tree*)
 (defvar *current-node*)
@@ -58,7 +57,7 @@
       (setq *current-symptom* (first *current-node*))))
 
 (defun print-diagnosis ()
-  (format t "Patient has ~a" *current-node*))
+  (format t "Diagnosis: ~a" *current-node*))
   
 
 
