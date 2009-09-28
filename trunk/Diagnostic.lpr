@@ -4,8 +4,9 @@
 
 (define-project :name :|Diagnostic|
   :modules (list (make-instance 'module :name "data")
-                 (make-instance 'module :name "functions")
-                 (make-instance 'module :name "main"))
+                 (make-instance 'module :name "main")
+                 (make-instance 'module :name "dtl")
+                 (make-instance 'module :name "learning-problem"))
   :projects nil
   :libraries nil
   :distributed-files nil
@@ -87,7 +88,7 @@
   :old-space-size 256000
   :new-space-size 6144
   :runtime-build-option :standard
-  :build-number 0
+  :build-number 1
   :on-initialization 'default-init-function
   :on-restart 'do-default-restart)
 

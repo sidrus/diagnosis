@@ -1,31 +1,68 @@
-;;; This is the main code file.
-(defparam *kb* (list *kb*)
-  "The main symptom/disease knowledge base")
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; REQUIRED IMPORTS ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+(load (compile-file "G:/Projects/School/CS305/diagnosis/data.cl"))
+(load (compile-file "G:/Projects/School/CS305/diagnosis/learning-problem.cl"))
+(load (compile-file "G:/Projects/School/CS305/diagnosis/dtl.cl"))
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; PROGRAM GLOBALS ;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+(defparameter *goals* '((diagnosis chicken-pox measles mumps influenza pneumonia no-illness common-cold)))
+(defvar *diagnosis-problem*)
+(defvar *decision-tree*)
+(defvar *current-node*)
+(defvar *current-symptom*)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Some utility functions ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun initialize ()
+  "Initialize the expert system."
+  
+  ;;; Define a problem set based on observation data
+  (setq *diagnosis-problem*
+      (make-learning-problem
+       :attributes *attributes*
+       :goals *goals*
+       :examples *examples*))
+  
+  ;;; Use the problem to build a decision tree
+  (setq *decision-tree*
+        (decision-tree-learning *diagnosis-problem*))
+  
+  ;;; Make our decision tree the default root node
+  (setq *current-node* *decision-tree*)
+  (setq *current-symptom* (first *current-node*)))
+
+(defun new-diagnosis ()
+  (initialize)
+  (diagnose))
+
+(defun diagnose()
+  "Presents the user with a question to help identify the illness."
+  (format t "Patient has ~a (~{~a~^, ~}): "
+    (first *current-symptom*) 
+    (rest *current-symptom*))
+  (force-output)
+  (select-branch (read))
+  (if (listp *current-node*)
+      (diagnose)
+    (print-diagnosis)))
+
+(defun select-branch (value)
+  "Selects a branch from the current node based on user input."
+  (setq *current-symptom* nil)
+  (setq *current-node* (rest (assoc value *current-node*)))
+  (if (listp *current-node*)
+      (setq *current-symptom* (first *current-node*))))
+
+(defun print-diagnosis ()
+  (format t "Patient has ~a" *current-node*))
+  
 
 
-;;; SHORTEST-PATH function determines the least-cost
-;;; route between two nodes in a network
-(defun shortest-path (start end net)
-  (bfs end (list (list start)) net))
-
-;;; BFS function executes a breadth-first search for a 
-;;; goal node given a network of nodes.
-(defun bfs (end queue net)
-  (if (null queue)
-      nil
-    (let ((path (car queue)))
-      (let ((node (car path)))
-        (if (eql node end)
-            (reverse path)
-          (bfs end
-               (append (cdr queue)
-                       (new-paths path node net))
-               net))))))
-
-;;; NEW-PATHS function is a node expansion function that
-;;; discovers new paths from a node.
-(defun new-paths (path node net)
-  (mapcar #'(lambda (n)
-              (cons n path))
-    (cdr (assoc node net))))
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; MAIN PROGRAM LOGIC ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+(initialize)
