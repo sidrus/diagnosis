@@ -11,7 +11,7 @@
      common-cold)))
 
 (defvar *attributes* 
-  '((fever yes no)
+  '((fever none mild severe)
     (red-spots yes no)
     (rash yes no)
     (cough yes no)
@@ -26,7 +26,7 @@
 
 (defvar *examples*
     '(((diagnosis . no-illness) 
-       (fever . no) 
+       (fever . none) 
        (red-spots . no) 
        (rash . no) 
        (cough . no) 
@@ -40,7 +40,7 @@
        (shivering . no))
       
       ((diagnosis . common-cold) 
-       (fever . yes) 
+       (fever . mild) 
        (red-spots . no) 
        (rash . no) 
        (cough . yes) 
@@ -54,7 +54,7 @@
        (shivering . no))
       
       ((diagnosis . common-cold) 
-       (fever . no) 
+       (fever . none) 
        (red-spots . no) 
        (rash . no) 
        (cough . yes) 
@@ -68,7 +68,7 @@
        (shivering . no))
       
       ((diagnosis . chicken-pox) 
-       (fever . yes) 
+       (fever . mild) 
        (red-spots . yes) 
        (rash . no) 
        (cough . no) 
@@ -82,7 +82,7 @@
        (shivering . no))
       
       ((diagnosis . measles) 
-       (fever . yes) 
+       (fever . severe) 
        (red-spots . yes) 
        (rash . yes) 
        (cough . yes) 
@@ -96,7 +96,7 @@
        (shivering . no))
       
       ((diagnosis . mumps) 
-       (fever . yes) 
+       (fever . severe) 
        (red-spots . no) 
        (rash . no) 
        (cough . no) 
@@ -110,7 +110,7 @@
        (shivering . no))
       
       ((diagnosis . influenza) 
-       (fever . yes) 
+       (fever . mild) 
        (red-spots . no) 
        (rash . no) 
        (cough . yes) 
@@ -124,7 +124,7 @@
        (shivering . no))
       
       ((diagnosis . pneumonia) 
-       (fever . yes) 
+       (fever . mild) 
        (red-spots . no) 
        (rash . no) 
        (cough . yes) 
