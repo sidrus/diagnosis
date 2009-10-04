@@ -45,7 +45,7 @@
 ;;; on the input from the user.
 (defun diagnose()
   "Presents the user with a question to help identify the illness."
-  (format t "Does the patient exhibit the symptom -- has ~a (~{~a~^, ~}): "
+  (format t "Does the patient exhibit the symptom -- ~a (~{~a~^, ~}): "
     (first *current-symptom*) 
     (rest *current-symptom*))
   (force-output)
