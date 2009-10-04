@@ -74,9 +74,10 @@
 (defun select-branch (value)
   "Selects a branch from the current node based on user input."
   (setq *current-symptom* nil)
-  (setq *current-node* (rest (assoc value *current-node*)))
-  (if (listp *current-node*)
-      (setq *current-symptom* (first *current-node*))))
+  (when (listp *current-node*)
+    (setq *current-node* (rest (assoc value *current-node*)))
+    (if (listp *current-node*)
+        (setq *current-symptom* (first *current-node*)))))
 
 ;;; Print the diagnosis to the default output stream.
 (defun print-diagnosis ()
